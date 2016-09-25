@@ -28,15 +28,17 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
   static final String nl = "n";
 
   public static void main(String[] args) {
+    final String path=args[0].toString();
+    final String subject=args[1].toString();
     javax.swing.SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
-        createAndShowGUI();
+        createAndShowGUI(path,subject);
       }
     });
   }
   
-  public CompleteDemo() {
+  public CompleteDemo(final String filepath, final String subject) {
     super(new BorderLayout());
     JButton jb = new JButton("Clear");
     jb.addActionListener(this);
@@ -46,11 +48,12 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
         try{ 
           // java.util.Date file_name_timestamp= new java.util.Date();
           // String current = file_name_timestamp.getDate().toString();
-          PrintWriter writer = new PrintWriter(new java.util.Date().toString()+".txt", "UTF-8");
+          PrintWriter writer = new PrintWriter(filepath+"/"+subject+"/"+new java.util.Date().toString()+".txt", "UTF-8");
           // writer.println("The first line");
           // writer.println("The second line");
           writer.println(textArea.getText());
           writer.close();
+          System.out.println("Successfully written to /"+filepath+"/"+subject+" directory!");
         }catch(Exception z){
           System.out.println(z);
         }
@@ -141,14 +144,14 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
   textArea.setCaretPosition(textArea.getDocument().getLength());
   }
 
-  private static void createAndShowGUI() {
+  private static void createAndShowGUI(String filepath, String subject) {
     //Make sure we have nice window decorations.
     JFrame.setDefaultLookAndFeelDecorated(true);
     //Create and set up the window.
     JFrame frame = new JFrame("KeyEventDemo");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //Create and set up the content pane.
-    JComponent newContentPane = new CompleteDemo();
+    JComponent newContentPane = new CompleteDemo(filepath, subject);
     newContentPane.setOpaque(true); //content panes must be opaque
     frame.setContentPane(newContentPane);
     //Display the window.
