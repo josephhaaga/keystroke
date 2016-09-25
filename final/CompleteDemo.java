@@ -44,9 +44,12 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
     write_to_file_button.addActionListener(new ActionListener() { 
       public void actionPerformed(ActionEvent e) {
         try{ 
-          PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
-          writer.println("The first line");
-          writer.println("The second line");
+          // java.util.Date file_name_timestamp= new java.util.Date();
+          // String current = file_name_timestamp.getDate().toString();
+          PrintWriter writer = new PrintWriter(new java.util.Date().toString()+".txt", "UTF-8");
+          // writer.println("The first line");
+          // writer.println("The second line");
+          writer.println(textArea.getText());
           writer.close();
         }catch(Exception z){
           System.out.println(z);

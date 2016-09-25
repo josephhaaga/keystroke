@@ -1,0 +1,41 @@
+KEY PRESSED: n    kCode = 16 (Shift)n    mods = 64 (Shift)n    action key? NOn    key location: leftn 1474824552457
+KEY PRESSED: n    kCode = 74 (J)n    mods = 64 (Shift)n    action key? NOn    key location: standardn 1474824552888
+KEY TYPED: n    key str = 'J'n    mods = 64 (Shift)n    action key? NOn    key location: unknownn 1474824552890
+KEY RELEASED: n    kCode = 16 (Shift)n    mods = 0 (no mods)n    action key? NOn    key location: leftn 1474824552960
+KEY RELEASED: n    kCode = 74 (J)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824552972
+KEY PRESSED: n    kCode = 79 (O)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553141
+KEY TYPED: n    key str = 'o'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553142
+KEY PRESSED: n    kCode = 83 (S)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553233
+KEY TYPED: n    key str = 's'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553234
+KEY RELEASED: n    kCode = 79 (O)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553259
+KEY PRESSED: n    kCode = 69 (E)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553336
+KEY TYPED: n    key str = 'e'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553337
+KEY RELEASED: n    kCode = 83 (S)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553407
+KEY PRESSED: n    kCode = 80 (P)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553425
+KEY TYPED: n    key str = 'p'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553425
+KEY RELEASED: n    kCode = 69 (E)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553462
+KEY PRESSED: n    kCode = 72 (H)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553541
+KEY TYPED: n    key str = 'h'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553542
+KEY RELEASED: n    kCode = 80 (P)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553558
+KEY RELEASED: n    kCode = 72 (H)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553667
+KEY PRESSED: n    kCode = 32 (Space)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553700
+KEY TYPED: n    key str = ' 'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824553701
+KEY PRESSED: n    kCode = 16 (Shift)n    mods = 64 (Shift)n    action key? NOn    key location: leftn 1474824553759
+KEY RELEASED: n    kCode = 32 (Space)n    mods = 64 (Shift)n    action key? NOn    key location: standardn 1474824553802
+KEY PRESSED: n    kCode = 72 (H)n    mods = 64 (Shift)n    action key? NOn    key location: standardn 1474824553863
+KEY TYPED: n    key str = 'H'n    mods = 64 (Shift)n    action key? NOn    key location: unknownn 1474824553864
+KEY RELEASED: n    kCode = 16 (Shift)n    mods = 0 (no mods)n    action key? NOn    key location: leftn 1474824553924
+KEY RELEASED: n    kCode = 72 (H)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824553949
+KEY PRESSED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554018
+KEY TYPED: n    key str = 'a'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824554019
+KEY RELEASED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554114
+KEY PRESSED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554184
+KEY TYPED: n    key str = 'a'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824554185
+KEY PRESSED: n    kCode = 71 (G)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554225
+KEY TYPED: n    key str = 'g'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824554226
+KEY RELEASED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554246
+KEY RELEASED: n    kCode = 71 (G)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554304
+KEY PRESSED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554333
+KEY TYPED: n    key str = 'a'n    mods = 0 (no mods)n    action key? NOn    key location: unknownn 1474824554334
+KEY RELEASED: n    kCode = 65 (A)n    mods = 0 (no mods)n    action key? NOn    key location: standardn 1474824554437
+
