@@ -18,6 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+// Write to CSV
+import java.io.PrintWriter;
+
 public class CompleteDemo extends JPanel implements KeyListener, ActionListener {
 
   JTextArea textArea;
@@ -37,6 +40,19 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
     super(new BorderLayout());
     JButton jb = new JButton("Clear");
     jb.addActionListener(this);
+    JButton write_to_file_button = new JButton("Write To File");
+    write_to_file_button.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent e) {
+        try{ 
+          PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+          writer.println("The first line");
+          writer.println("The second line");
+          writer.close();
+        }catch(Exception z){
+          System.out.println(z);
+        }
+      } 
+    } );
     textFiled = new JTextField(20);
     textFiled.addKeyListener(this);
   //typingArea.setFocusTraversalKeysEnabled(false);
@@ -47,6 +63,7 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
     add(textFiled, BorderLayout.PAGE_START);
     add(scrPanl, BorderLayout.CENTER);
     add(jb, BorderLayout.PAGE_END);
+    add(write_to_file_button, BorderLayout.PAGE_END);
   }
 
   @Override
