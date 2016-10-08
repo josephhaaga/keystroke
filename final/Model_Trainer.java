@@ -29,16 +29,23 @@ public class Model_Trainer{
 				List<String> keys = new ArrayList<String>();
 				List<String> actions = new ArrayList<String>(); 
 				Scanner sn = new Scanner(new FileReader("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt"));
-				tempLine=sn.nextLine();
-				BigInteger firstTimestamp = new BigInteger(tempLine.substring(tempLine.lastIndexOf(" ")+1));
+				Boolean firstLine = true;
+				// tempLine=sn.nextLine();
+
+				// BigInteger firstTimestamp = new BigInteger(tempLine.substring(tempLine.lastIndexOf(" ")+1));
+				BigInteger firstTimestamp = new BigInteger("0");
 				while(sn.hasNextLine()){
 					tempLine = sn.nextLine();
 					try{
+						if(firstLine){
+							firstTimestamp = new BigInteger(tempLine.substring(tempLine.lastIndexOf(" ")+1));
+							firstLine = false;
+						}
 						timestamp = new BigInteger(tempLine.substring(tempLine.lastIndexOf(" ")+1));
 						timestamp = timestamp.subtract(firstTimestamp);
 						actionType = tempLine.substring(tempLine.indexOf(" ")+1,tempLine.indexOf(":"));
 						key = tempLine.substring(tempLine.indexOf("(")+1,tempLine.indexOf(")n"));
-						if(!key.contains("no mods")){
+						if(!key.contains("no mods") && !actionType.contains("TYPED")){
 							// print(timestamp + " " + key + " " + actionType);
 							timestamps.add(timestamp);
 							keys.add(key);
@@ -50,26 +57,26 @@ public class Model_Trainer{
 
 				}
 				sn.close(); // safety first, then teamwork
-				print(timestamps.get(10).toString());
 				// List<List> results = new ArrayList<List>(){timestamps, keys, actions};
 				List<List> results = new ArrayList<List>();
-				
 
 				// results = {timestamps, keys, actions};
-				// results.add(timestamps);
-				// results.add(keys);
-				// results.add(actions);
+				results.add(timestamps);
+				results.add(keys);
+				results.add(actions);
 				return results;
 			}catch(Exception e){
 				e.printStackTrace();
-
 			}
 			return null;
 		}
 
 	public static void main(String args[]){
 		// Read txt file
-		List<List> keystrokes = readInputs("A string");
+		List<List> keystrokes = readInputs("A string that will eventually represent filepath");
+		for(int i=0;i<20;i++){
+			print(keystrokes.get(0).get(i).toString()+" "+keystrokes.get(1).get(i).toString()+" "+keystrokes.get(2).get(i).toString());
+		}
 	}
 
 }
