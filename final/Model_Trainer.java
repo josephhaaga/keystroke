@@ -19,6 +19,12 @@ public class Model_Trainer{
 		return null;
 	}
 
+	public static List<Integers> findIndices(List<E> list, Object obj){
+	// public static List<Integers> findIndices(List<Object> list, Object obj){
+		List<Integers> results = new ArrayList<Integers>;
+		
+	}
+
 	public static int averageDwellTime(List<List> strokes){
 		// t_dwell = t_released - t_pressed
 		Set<String> uniqueKeys = new HashSet<>(strokes.get(1));
@@ -26,21 +32,7 @@ public class Model_Trainer{
 		for(Iterator<String> i = uniqueKeys.iterator(); i.hasNext(); ) {
 		    String item = i.next();
 		    List<String> thisKeystrokeKeys = strokes.get(1);
-		    System.out.println(item);
-		    int howManyElementsDropped = 0;
-		    List<Integer> indices = new ArrayList<Integer>();
-		    int index = thisKeystrokeKeys.indexOf(item);
-		    while (index >=0){
-		        System.out.println("Index : "+index);
-		        index = thisKeystrokeKeys.indexOf(item);
-		        howManyElementsDropped+=index;
-		        if(thisKeystrokeKeys.size()>0){
-		        	indices.add(index+howManyElementsDropped);
-		        	thisKeystrokeKeys = thisKeystrokeKeys.subList(index+1,thisKeystrokeKeys.size()-1);
-		        }else{
-		        	break;
-		        }
-		    }
+		   	List<Integer> indicesWhereThisAppears = new ArrayList<Integer>();
 			print("\n");
 		}
 
