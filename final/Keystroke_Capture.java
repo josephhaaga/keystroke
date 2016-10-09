@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 // Write to CSV
 import java.io.PrintWriter;
 
-public class CompleteDemo extends JPanel implements KeyListener, ActionListener {
+public class Keystroke_Capture extends JPanel implements KeyListener, ActionListener {
 
   JTextArea textArea;
   JTextField textFiled;
@@ -38,7 +38,7 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
     });
   }
   
-  public CompleteDemo(final String filepath, final String subject) {
+  public Keystroke_Capture(final String filepath, final String subject) {
     super(new BorderLayout());
     JButton jb = new JButton("Clear");
     jb.addActionListener(this);
@@ -151,7 +151,7 @@ public class CompleteDemo extends JPanel implements KeyListener, ActionListener 
     JFrame frame = new JFrame("KeyEventDemo");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //Create and set up the content pane.
-    JComponent newContentPane = new CompleteDemo(filepath, subject);
+    JComponent newContentPane = new Keystroke_Capture(filepath, subject);
     newContentPane.setOpaque(true); //content panes must be opaque
     frame.setContentPane(newContentPane);
     //Display the window.
