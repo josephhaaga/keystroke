@@ -19,24 +19,35 @@ public class Model_Trainer{
 		return null;
 	}
 
-	public static List<Integers> findIndices(List<E> list, Object obj){
-	// public static List<Integers> findIndices(List<Object> list, Object obj){
-		List<Integers> results = new ArrayList<Integers>;
-		
-	}
-
-	public static int averageDwellTime(List<List> strokes){
-		// t_dwell = t_released - t_pressed
-		Set<String> uniqueKeys = new HashSet<>(strokes.get(1));
-		
-		for(Iterator<String> i = uniqueKeys.iterator(); i.hasNext(); ) {
-		    String item = i.next();
-		    List<String> thisKeystrokeKeys = strokes.get(1);
-		   	List<Integer> indicesWhereThisAppears = new ArrayList<Integer>();
-			print("\n");
+	// public static List<Integer> findIndices(List<String> list, Object obj){
+	public static List<String> findDwellTimes(List<List> list){
+		// String a[][] = new String[][];
+		List<String> dwellTimes = new ArrayList<String>();
+		LinkedList<String> pressedButNotReleasedKeys = new LinkedList<String>();
+		LinkedList<String> pressedButNotReleasedTimestamps = new LinkedList<String>();
+		print("size: ");
+		System.out.println(list.get(0).size());
+		String tempAction, tempKey, tempTimestamp, releasedData, releaseTimestampString;
+		int index, releaseTimestamp;
+		for(int i=0; i<list.get(0).size()-1; i++){
+			tempAction = list.get(2).get(i).toString(); // PRESSED or RELEASED
+			tempKey = list.get(1).get(i).toString(); // Letter of key pressed/released
+			tempTimestamp = list.get(0).get(i).toString(); // Unix epoch timestamp
+			if(tempAction.toString().contains("PRESSED")){
+				pressedButNotReleasedKeys.push(tempKey);
+				pressedButNotReleasedTimestamps.push(tempTimestamp);
+			}else if(tempAction.toString().contains("RELEASED")){
+				// Key Released
+				index = pressedButNotReleasedKeys.indexOf(tempKey);
+				releasedData = pressedButNotReleasedKeys.remove(index);
+				// releasedTimestamp = ;
+				releaseTimestamp = Integer.parseInt(tempTimestamp) - Integer.parseInt(pressedButNotReleasedTimestamps.remove(index));
+				releaseTimestampString = new Integer(releaseTimestamp).toString();
+				dwellTimes.add(tempKey+" "+releaseTimestampString);
+				// print(tempKey+" "+releaseTimestampString);
+			}
 		}
-
-		return uniqueKeys.size();
+		return dwellTimes;
 	}
 
 	public static List<List> readInputs(String filepath){
@@ -48,11 +59,8 @@ public class Model_Trainer{
 			List<BigInteger> timestamps = new ArrayList<BigInteger>();
 			List<String> keys = new ArrayList<String>();
 			List<String> actions = new ArrayList<String>(); 
-			Scanner sn = new Scanner(new FileReader("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt"));
+			Scanner sn = new Scanner(new FileReader(filepath));
 			Boolean firstLine = true;
-			// tempLine=sn.nextLine();
-
-			// BigInteger firstTimestamp = new BigInteger(tempLine.substring(tempLine.lastIndexOf(" ")+1));
 			BigInteger firstTimestamp = new BigInteger("0");
 			while(sn.hasNextLine()){
 				tempLine = sn.nextLine();
@@ -76,11 +84,8 @@ public class Model_Trainer{
 				}
 
 			}
-			sn.close(); // safety first, then teamwork
-			// List<List> results = new ArrayList<List>(){timestamps, keys, actions};
-			List<List> results = new ArrayList<List>();
-
-			// results = {timestamps, keys, actions};
+			sn.close(); // Close FileBuffer
+			List<List> results = new ArrayList<List>(); // Construct and return results object
 			results.add(timestamps);
 			results.add(keys);
 			results.add(actions);
@@ -93,15 +98,21 @@ public class Model_Trainer{
 
 	public static void main(String args[]){
 		// Read single txt file
-		List<List> keystrokes = readInputs("A string that will eventually represent filepath");
+		List<List> keystrokes = readInputs("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt");
 		
-		for(int i=0;i<20;i++){
-			print(keystrokes.get(0).get(i).toString()+" "+keystrokes.get(1).get(i).toString()+" "+keystrokes.get(2).get(i).toString());
-		}
+		// for(int i=0;i<20;i++){
+		// 	print(keystrokes.get(0).get(i).toString()+" "+keystrokes.get(1).get(i).toString()+" "+keystrokes.get(2).get(i).toString());
+		// }
+
+		// DEBUG
+		findDwellTimes(keystrokes); 
 
 		// Calculate features (Dwell Time, Flight Time, Shift-key Dwell Time)
-		int averageDwellTime = averageDwellTime(keystrokes);
-		print("AverageDwellTime: "+averageDwellTime);
+
+		// int averageDwellTime = averageDwellTime(keystrokes);
+		// print("AverageDwellTime: "+averageDwellTime);
+
+
 		// int averageFlightTime = averageFlightTime(keystrokes);
 		// int averageShiftKeyDwellTime = averageShiftKeyDwellTime(keystrokes);
 
