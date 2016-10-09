@@ -25,8 +25,6 @@ public class Model_Trainer{
 		List<String> dwellTimes = new ArrayList<String>();
 		LinkedList<String> pressedButNotReleasedKeys = new LinkedList<String>();
 		LinkedList<String> pressedButNotReleasedTimestamps = new LinkedList<String>();
-		print("size: ");
-		System.out.println(list.get(0).size());
 		String tempAction, tempKey, tempTimestamp, releasedData, releaseTimestampString;
 		int index, releaseTimestamp;
 		for(int i=0; i<list.get(0).size()-1; i++){
@@ -40,7 +38,6 @@ public class Model_Trainer{
 				// Key Released
 				index = pressedButNotReleasedKeys.indexOf(tempKey);
 				releasedData = pressedButNotReleasedKeys.remove(index);
-				// releasedTimestamp = ;
 				releaseTimestamp = Integer.parseInt(tempTimestamp) - Integer.parseInt(pressedButNotReleasedTimestamps.remove(index));
 				releaseTimestampString = new Integer(releaseTimestamp).toString();
 				dwellTimes.add(tempKey+" "+releaseTimestampString);
@@ -96,16 +93,45 @@ public class Model_Trainer{
 		return null;
 	}
 
+	public static Integer findAverageTime(List<String> timesList){
+		Integer runningAverage = 0;
+		int dwellTimeLength = 0;
+		for(String i: timesList ){
+			dwellTimeLength+=1;
+			runningAverage+= Integer.parseInt(i.substring(i.indexOf(" ")+1));
+		}
+		return (runningAverage/=dwellTimeLength);
+
+	}
+
 	public static void main(String args[]){
 		// Read single txt file
-		List<List> keystrokes = readInputs("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt");
-		
-		// for(int i=0;i<20;i++){
-		// 	print(keystrokes.get(0).get(i).toString()+" "+keystrokes.get(1).get(i).toString()+" "+keystrokes.get(2).get(i).toString());
-		// }
+		List<List> anDeeKeystrokes = readInputs("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt");
 
-		// DEBUG
-		findDwellTimes(keystrokes); 
+		print("AnDee Average Dwell Time: "+findAverageTime(findDwellTimes(anDeeKeystrokes)).toString());
+
+		List<List> anDeeKeystrokes2 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:23:05 EDT 2016.txt");
+
+		print("AnDee Average Dwell Time: "+findAverageTime(findDwellTimes(anDeeKeystrokes2)).toString());
+
+		List<List> anDeeKeystrokes3 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:22:43 EDT 2016.txt");
+
+		print("AnDee Average Dwell Time: "+findAverageTime(findDwellTimes(anDeeKeystrokes3)).toString());
+		
+
+
+		List<List> joeKeystrokes = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:50:34 EDT 2016.txt");
+
+		print("Joe Average Dwell Time: "+findAverageTime(findDwellTimes(joeKeystrokes)).toString());
+
+		List<List> joeKeystrokes2 = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:52:17 EDT 2016.txt");
+
+		print("Joe Average Dwell Time: "+findAverageTime(findDwellTimes(joeKeystrokes2)).toString());
+
+		List<List> joeKeystrokes3 = readInputs("quick_brown_fox/joehaaga/Sun Oct 09 18:47:57 EDT 2016.txt");
+
+		print("Joe Average Dwell Time: "+findAverageTime(findDwellTimes(joeKeystrokes3)).toString());
+
 
 		// Calculate features (Dwell Time, Flight Time, Shift-key Dwell Time)
 
