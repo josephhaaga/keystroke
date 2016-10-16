@@ -107,8 +107,17 @@ public class Model_Trainer{
 	}
 
 	public static void writeToCSV(String[] array_of_strings){
-		for(String a : array_of_strings){
-			print(a);
+		try{
+			PrintWriter writer = new PrintWriter("processed_output.csv", "UTF-8");
+			writer.println("name, averageDwellTime");
+			for(String a : array_of_strings){
+				writer.println(a);
+			}
+			// writer.println("The first line");
+			// writer.println("The second line");
+			writer.close();
+		}catch(Exception z){
+			z.printStackTrace();
 		}
 	}
 
@@ -116,19 +125,19 @@ public class Model_Trainer{
 		// Read single txt file
 		List<List> anDeeKeystrokes = readInputs("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt");
 
-		String andeestring1 = "andee "+findAverageTime(findDwellTimes(anDeeKeystrokes)).toString();
+		String andeestring1 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes)).toString();
 
 		print("AnDee Average Dwell Time: "+andeestring1);
 
 		List<List> anDeeKeystrokes2 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:23:05 EDT 2016.txt");
 
-		String andeestring2 = "andee "+findAverageTime(findDwellTimes(anDeeKeystrokes2)).toString();
+		String andeestring2 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes2)).toString();
 
 		print("AnDee Average Dwell Time: "+andeestring2);
 
 		List<List> anDeeKeystrokes3 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:22:43 EDT 2016.txt");
 
-		String andeestring3 = "andee "+findAverageTime(findDwellTimes(anDeeKeystrokes3)).toString();
+		String andeestring3 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes3)).toString();
 
 		print("AnDee Average Dwell Time: "+andeestring3);
 		
@@ -136,19 +145,19 @@ public class Model_Trainer{
 
 		List<List> joeKeystrokes = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:50:34 EDT 2016.txt");
 
-		String joestring1 = "joehaaga "+findAverageTime(findDwellTimes(joeKeystrokes)).toString();
+		String joestring1 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes)).toString();
 
 		print("Joe Average Dwell Time: "+joestring1);
 
 		List<List> joeKeystrokes2 = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:52:17 EDT 2016.txt");
 
-		String joestring2 = "joehaaga "+findAverageTime(findDwellTimes(joeKeystrokes2)).toString();
+		String joestring2 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes2)).toString();
 
 		print("Joe Average Dwell Time: "+joestring2);
 
 		List<List> joeKeystrokes3 = readInputs("quick_brown_fox/joehaaga/Sun Oct 09 18:47:57 EDT 2016.txt");
 
-		String joestring3 = "joehaaga "+findAverageTime(findDwellTimes(joeKeystrokes3)).toString();
+		String joestring3 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes3)).toString();
 
 		print("Joe Average Dwell Time: "+joestring3);
 
