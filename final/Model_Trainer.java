@@ -12,6 +12,7 @@ import java.util.*;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.core.Instances;
 import weka.core.Instance;
@@ -195,7 +196,8 @@ public class Model_Trainer{
 	 		data.setClassIndex(0);
 	 		String[] options = new String[1];
 			options[0] = "-U";            // unpruned tree
-			J48 tree = new J48();         // new instance of tree
+			// J48 tree = new J48();         // new instance of tree
+			J48 tree = new J48();
 			tree.setOptions(options);     // set the options
 			tree.buildClassifier(data);   // build classifier
 
@@ -214,9 +216,14 @@ public class Model_Trainer{
 			// inst.setDataset(test); 
 
 			double score = tree.classifyInstance(test_instance.instance(0));
+			System.out.println(tree.toString());
 
-			System.out.printf("score: %f\n", score);
+			System.out.printf("J48 score: %f\n", score);
 
+			NaiveBayes nb = new NaiveBayes();
+			nb.buildClassifier(data);
+			System.out.println(nb.toString());
+			System.out.printf("NB score: %f\n", nb.classifyInstance(test_instance.instance(0)));
 
 
 		}catch(Exception e){
