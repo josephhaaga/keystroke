@@ -9,10 +9,12 @@ import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-// import weka.classifiers.Classifier;
-// import weka.classifiers.Evaluation;
-// import weka.classifiers.trees.J48;
-
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.classifiers.trees.J48;
+import weka.core.converters.ConverterUtils.DataSource;
+import weka.core.Instances;
+import weka.core.Instance;
 
 public class Model_Trainer{
 
@@ -106,9 +108,9 @@ public class Model_Trainer{
 
 	}
 
-	public static void writeToCSV(String[] array_of_strings){
+	public static void writeToCSV(String[] array_of_strings, String filename){
 		try{
-			PrintWriter writer = new PrintWriter("processed_output.csv", "UTF-8");
+			PrintWriter writer = new PrintWriter(filename, "UTF-8");
 			writer.println("name, averageDwellTime");
 			for(String a : array_of_strings){
 				writer.println(a);
@@ -169,14 +171,57 @@ public class Model_Trainer{
 		// int averageDwellTime = averageDwellTime(keystrokes);
 		// print("AverageDwellTime: "+averageDwellTime);
 
-		writeToCSV(input_strings);
-
-
-
 		// int averageFlightTime = averageFlightTime(keystrokes);
 		// int averageShiftKeyDwellTime = averageShiftKeyDwellTime(keystrokes);
 
 		// Add feature vector to List of training Data (Labelled)
+		
+
+		// TRAINING SET
+		writeToCSV(input_strings,"processed_output.csv");
+
+		// TEST SET
+		List<List> joeKeystrokes4 = readInputs("quick_brown_fox/joehaaga/Mon Oct 17 11:58:20 EDT 2016.txt");
+
+		String joestring4 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes4)).toString();
+
+		String[] test_items = {joestring4};
+
+		writeToCSV(test_items,"test_set.csv");
+
+		try{
+			DataSource source = new DataSource("processed_output.csv");
+	 		Instances data = source.getDataSet();
+	 		data.setClassIndex(0);
+	 		String[] options = new String[1];
+			options[0] = "-U";            // unpruned tree
+			J48 tree = new J48();         // new instance of tree
+			tree.setOptions(options);     // set the options
+			tree.buildClassifier(data);   // build classifier
+
+
+
+			// DataSource test = new DataSource("test_set.csv");
+			DataSource test = new DataSource("fake_test_set.csv");
+	 		Instances test_instance = test.getDataSet();
+	 		test_instance.setClassIndex(0);
+	 		// System.out.println(test_instance);
+	 	// 	Instance inst = new DenseInstance(2); 
+
+			// // Set instance's values for the attributes "length", "weight", and "position"
+			// inst.setValue(name, "joehaaga"); 
+			// inst.setValue(averageDwellTime, 96); 
+			// inst.setDataset(test); 
+
+			double score = tree.classifyInstance(test_instance.instance(0));
+
+			System.out.printf("score: %f\n", score);
+
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }
