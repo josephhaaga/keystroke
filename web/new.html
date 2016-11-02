@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<p id="the_sentence">The quick brown fox jumped over the lazy dog.</p>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+ 
+<script>
+array=$('#the_sentence').text().split("")
+
+$('body').keypress(function(e){
+	console.log(Date.now());
+	// console.log(e.keyCode);
+	console.log(e.which)
+});
+
+</script>
+
+</body>
+</html>
