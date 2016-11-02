@@ -52,6 +52,56 @@ public class Model_Trainer{
 		return dwellTimes;
 	}
 
+
+
+	public static int[] findFlightTimes(List<List> list){
+		// the time between "key up" and the next "key down"
+		// List<int> flightTimes = new int[list.size()];
+		int[] flightTimes = new int[list.size()];
+		int i=0;
+		LinkedList<String> releaseTimes = new LinkedList<String>();
+
+		String tempAction, tempKey, tempTimestamp, releasedData, releaseTimestampString;
+		int index, releaseTimestamp;
+		int lastRelease;
+
+		print ("~~~~~ FLIGHT TIME ~~~~~~");
+		print("\n");
+		// print("FlightTime: "+list.get(2));
+		for(int x=0; x<list.get(0).size(); x++){
+			print(" "+list.get(0).get(x)+" "+list.get(2).get(x));
+			tempAction = list.get(2).get(x).toString(); // PRESSED or RELEASED
+			tempKey = list.get(1).get(x).toString(); // Letter of key pressed/released
+			tempTimestamp = list.get(0).get(x).toString(); // Unix epoch timestamp
+			if(tempAction.toString().contains("RELEASED")){
+				// pressedButNotReleasedKeys.push(tempKey);
+				// pressedButNotReleasedTimestamps.push(tempTimestamp);
+				releaseTimes.push(tempTimestamp);
+			}else if(tempAction.toString().contains("PRESSED")){
+				// Key Released
+				// index = pressedButNotReleasedKeys.indexOf(tempKey);
+				// releasedData = pressedButNotReleasedKeys.remove(index);
+				// releaseTimestamp = Integer.parseInt(tempTimestamp) - Integer.parseInt(pressedButNotReleasedTimestamps.remove(index));
+				// releaseTimestampString = new Integer(releaseTimestamp).toString();
+				// lastRelease = new Integer(releaseTimes.pop());
+				try{
+					flightTimes[i] = ((new Integer(tempTimestamp) - new Integer(releaseTimes.pop())));
+					i++;
+				}catch(Exception e){
+					// print(e.toString());
+				}
+				// print(tempKey+" "+releaseTimestampString);
+			}
+		}
+
+		print("\n");
+
+
+		return flightTimes;
+	}
+
+
+
 	public static List<List> readInputs(String filepath){
 		try{
 			String tempLine; // current string while iterating through file
@@ -109,10 +159,18 @@ public class Model_Trainer{
 
 	}
 
+	public static double findAverageFlightTime(int[] numbers){
+		double total = 0;
+		for(int k : numbers){
+			total+=k;
+		}
+		return (total/numbers.length);
+	}
+
 	public static void writeToCSV(String[] array_of_strings, String filename){
 		try{
 			PrintWriter writer = new PrintWriter(filename, "UTF-8");
-			writer.println("name, averageDwellTime");
+			writer.println("name, averageDwellTime, averageFlightTime");
 			for(String a : array_of_strings){
 				writer.println(a);
 			}
@@ -128,19 +186,28 @@ public class Model_Trainer{
 		// Read single txt file
 		List<List> anDeeKeystrokes = readInputs("quick_brown_fox/AnDee/Sun Sep 25 13:35:27 EDT 2016.txt");
 
-		String andeestring1 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes)).toString();
+		String andeestring1 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes)).toString()+", "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes));
+
+		print("\n");
+		print ("dwell times: "+findDwellTimes(anDeeKeystrokes).toString());
+		print("\n");
 
 		print("AnDee Average Dwell Time: "+andeestring1);
 
+		print ("AnDee Average Flight Time: "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes)));
+
 		List<List> anDeeKeystrokes2 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:23:05 EDT 2016.txt");
 
-		String andeestring2 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes2)).toString();
+		String andeestring2 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes2)).toString()+", "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes2));
 
 		print("AnDee Average Dwell Time: "+andeestring2);
 
+		print ("AnDee Average Flight Time: "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes2)));
+
 		List<List> anDeeKeystrokes3 = readInputs("quick_brown_fox/AnDee/Sat Oct 08 21:22:43 EDT 2016.txt");
 
-		String andeestring3 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes3)).toString();
+		String andeestring3 = "andee, "+findAverageTime(findDwellTimes(anDeeKeystrokes3)).toString()+", "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes3));
+		print ("AnDee Average Flight Time: "+findAverageFlightTime(findFlightTimes(anDeeKeystrokes3)));
 
 		print("AnDee Average Dwell Time: "+andeestring3);
 		
@@ -148,21 +215,25 @@ public class Model_Trainer{
 
 		List<List> joeKeystrokes = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:50:34 EDT 2016.txt");
 
-		String joestring1 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes)).toString();
+		String joestring1 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes)).toString()+", "+findAverageFlightTime(findFlightTimes(joeKeystrokes));
 
 		print("Joe Average Dwell Time: "+joestring1);
 
+		print ("Joe Average Flight Time: "+findAverageFlightTime(findFlightTimes(joeKeystrokes)));
+
 		List<List> joeKeystrokes2 = readInputs("quick_brown_fox/joehaaga/Sun Sep 25 13:52:17 EDT 2016.txt");
 
-		String joestring2 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes2)).toString();
+		String joestring2 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes2)).toString()+", "+findAverageFlightTime(findFlightTimes(joeKeystrokes2));
 
 		print("Joe Average Dwell Time: "+joestring2);
+		print ("Joe Average Flight Time: "+findAverageFlightTime(findFlightTimes(joeKeystrokes2)));
 
 		List<List> joeKeystrokes3 = readInputs("quick_brown_fox/joehaaga/Sun Oct 09 18:47:57 EDT 2016.txt");
 
-		String joestring3 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes3)).toString();
+		String joestring3 = "joehaaga, "+findAverageTime(findDwellTimes(joeKeystrokes3)).toString()+", "+findAverageFlightTime(findFlightTimes(joeKeystrokes3));
 
 		print("Joe Average Dwell Time: "+joestring3);
+		print ("Joe Average Flight Time: "+findAverageFlightTime(findFlightTimes(joeKeystrokes3)));
 
 
 		String[] input_strings = {andeestring1, andeestring2, andeestring3, joestring1, joestring2, joestring3};
