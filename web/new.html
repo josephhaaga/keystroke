@@ -8,9 +8,9 @@ button{
 	display:none;
 }
 
-textarea{
+input{
   width:50%;
-  height:25%;
+  /*height:25%;*/
 }
 
 .area{
@@ -21,7 +21,7 @@ textarea{
   letter-spacing: -7px;
   font-weight:700;
   text-transform:uppercase;
-  animation:blur .75s ease-out infinite;
+  animation:blur 2s ease-out infinite;
   text-shadow:0px 0px 5px #fff,
       0px 0px 7px #fff;
 }
@@ -51,20 +51,20 @@ textarea{
 
 
 @-webkit-keyframes super-rainbow {
-  0%   { background: #ffff00; } 
-  20%  { background: #ffcd00; }
-  40%  { background: #c3d74b; }
+  /*0%   { background: #ffff00; } */
+  0%  { background: #6aa53a; }
+  30%  { background: #c3d74b; }
   60%  { background: #c3d7d7; }
-  80%  { background: #ffc39b; }
-  100% { background: #ffff00; }
+  100%  { background: #ffc39b; }
+  /*100% { background: #ffff00; }*/
 }
 @-moz-keyframes super-rainbow {
-  0%   { background: #ffff00; } 
-  20%  { background: #ffcd00; }
-  40%  { background: #c3d74b; }
+  /*0%   { background: #ffff00; } */
+  0%  { background: #6aa53a; }
+  30%  { background: #c3d74b; }
   60%  { background: #c3d7d7; }
-  80%  { background: #ffc39b; }
-  100% { background: #ffff00; }
+  100%  { background: #ffc39b; }
+  /*100% { background: #ffff00; }*/
 }
 
 .thanks{
@@ -77,12 +77,12 @@ textarea{
 <body>
 
 <p id="the_sentence">The quick brown fox jumped over the lazy dog.</p>
-<textarea></textarea>
+<input type="text">
 
 <button>Done!</button>
 
 <div class="area">
- ⚠ THANK YOU ⚠
+THANK YOU :)
 </div>
 
 
@@ -125,7 +125,7 @@ keymap={8:"Backspace", 9:"Tab", 13:"Enter", 16:"Shift", 17:"Control", 18:"Alt",
 
 
 function checkTextArea(sentence){
-	if($('textarea').val() == sentence){
+	if($('input').val() == sentence){
     $('button').show();
     $('button').unbind().on('click',nextSentence(sentence_number));
     sentence_number+=1;
@@ -136,15 +136,16 @@ function checkTextArea(sentence){
 
 keystrokes=[[],[],[]];
 
+$('input').focus();
 
-$('textarea').keydown(function(e){
+$('input').keydown(function(e){
 	console.log(Date.now()+" "+keymap[e.which]+" PRESSED");
   keystrokes[sentence_number-1].push(Date.now()+" "+keymap[e.which]+" PRESSED");
   // console.log(Date.now()+" "+e.which+" "+" PRESSED");
 	// console.log(e.keyCode);
 });
 
-$('textarea').keyup(function(e){
+$('input').keyup(function(e){
 	console.log(Date.now()+" "+keymap[e.which]+" RELEASED");
   keystrokes[sentence_number-1].push(Date.now()+" "+keymap[e.which]+" RELEASED");
 	// console.log(e.keyCode);
@@ -152,23 +153,28 @@ $('textarea').keyup(function(e){
 });
 
 function nextSentence(val){
-  $('textarea').val('');
+  $('input').val('');
   $('button').unbind('click');
   if(val==1){
     $('#the_sentence').text("Shall I compare thee to a summ3r's day?!");
   }else if(val==2){
     $('#the_sentence').text("Email me at user@inter.net; thanks!");
   }else{
-    subject= window.prompt("What's your full name?");
-    $('textarea').unbind();
+    subject= "";
+    while(subject==""){
+      subject= window.prompt("What's your full name?");
+    }
+    $('input').unbind();
     var newPostKey = firebase.database().ref().child('samples').push().key;
 
     firebase.database().ref('samples/' + newPostKey).set({
       subject: subject,
       keystrokes: JSON.stringify(keystrokes)
     });
+    $('button').hide();
+    $('#the_sentence').hide();
     $('body').addClass("thanks");
-    $('textarea').hide();
+    $('input').hide();
     $('.area').show();
     // Push 'keystrokes' object to Firebase
   }
