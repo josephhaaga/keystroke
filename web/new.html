@@ -75,7 +75,7 @@ input{
 
 </style>
 <body>
-
+<h2>Please type the sentence</h2>
 <p id="the_sentence">The quick brown fox jumped over the lazy dog.</p>
 <input type="text">
 
@@ -173,6 +173,7 @@ function nextSentence(val){
     });
     $('button').hide();
     $('#the_sentence').hide();
+    $('h2').hide();
     $('body').addClass("thanks");
     $('input').hide();
     $('.area').show();
