@@ -76,7 +76,7 @@ input{
 </style>
 <body>
 <h2>Please type the sentence</h2>
-<p id="the_sentence">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p id="the_sentence">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Is James really qualified to run the zoo? Yes, James is qualified the run the zoo.</p>
 <input type="text">
 
 <button>Done!</button>
@@ -155,30 +155,24 @@ $('input').keyup(function(e){
 function nextSentence(val){
   $('input').val('');
   $('button').unbind('click');
-  if(val==1){
-    $('#the_sentence').text("Is James really qualified to run the zoo? Yes, James is qualified the run the zoo.");
-  }else if(val==2){
-    $('#the_sentence').text("Email me at user@inter.net; thanks!");
-  }else{
-    subject= "";
-    while(subject==""){
-      subject= window.prompt("What's your full name?");
-    }
-    $('input').unbind();
-    var newPostKey = firebase.database().ref().child('samples').push().key;
-
-    firebase.database().ref('samples/' + newPostKey).set({
-      subject: subject,
-      keystrokes: JSON.stringify(keystrokes)
-    });
-    $('button').hide();
-    $('#the_sentence').hide();
-    $('h2').hide();
-    $('body').addClass("thanks");
-    $('input').hide();
-    $('.area').show();
-    // Push 'keystrokes' object to Firebase
+  subject= "";
+  while(subject==""){
+    subject= window.prompt("What's your full name?");
   }
+  $('input').unbind();
+  var newPostKey = firebase.database().ref().child('samples').push().key;
+
+  firebase.database().ref('samples/' + newPostKey).set({
+    subject: subject,
+    keystrokes: JSON.stringify(keystrokes)
+  });
+  $('button').hide();
+  $('#the_sentence').hide();
+  $('h2').hide();
+  $('body').addClass("thanks");
+  $('input').hide();
+  $('.area').show();
+  // Push 'keystrokes' object to Firebase
 }
 
 </script>
