@@ -124,11 +124,11 @@ keymap={8:"Backspace", 9:"Tab", 13:"Enter", 16:"Shift", 17:"Control", 18:"Alt",
 
 function checkTextArea(sentence){
 	if($('input').val() == sentence){
-    $('button').show();
+    // $('button').show();
     $('button').unbind().on('click',nextSentence(sentence_number));
     sentence_number+=1;
   }else{
-   $('button').hide();
+   // $('button').hide();
   }
 }
 
@@ -164,7 +164,7 @@ function nextSentence(val){
     subject: subject,
     keystrokes: JSON.stringify(keystrokes)
   });
-  $('button').hide();
+  // $('button').hide();
   $('#the_sentence').hide();
   $('h2').hide();
   $('body').addClass("thanks");
